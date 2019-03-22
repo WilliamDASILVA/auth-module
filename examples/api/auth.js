@@ -12,13 +12,13 @@ app.use(cookieParser())
 app.use(bodyParser.json())
 
 // JWT middleware
-app.use(
-  jwt({
-    secret: 'dummy'
-  }).unless({
-    path: '/api/auth/login'
-  })
-)
+// app.use(
+//   jwt({
+//     secret: 'dummy'
+//   }).unless({
+//     path: '/api/auth/login'
+//   })
+// )
 
 // -- Routes --
 
@@ -41,11 +41,10 @@ app.post('/login', (req, res, next) => {
     'dummy'
   )
 
-  res.json({
-    token: {
-      accessToken
-    }
-  })
+  res
+    .set('Access-Token', accessToken)
+    .status(200)
+    .json({})
 })
 
 // [GET] /user
